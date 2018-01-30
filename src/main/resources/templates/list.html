@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+</head>
+<body>
+    <a href="/addressform">Add an Entry</a><br />
+    <div th:each="entry : ${entries}">
+        <h4 th:inline="text">[[${entry.firstName}]] <br /></h4>
+        <h4 th:inline="text">[[${entry.lastName}]] <br /></h4>
+        <h4 th:inline="text">[[${entry.address}]] <br /></h4>
+        <h4 th:inline="text">[[${entry.email}]] <br /></h4>
+        <h4 th:inline="text">[[${entry.phoneNum}]] <br /></h4>
+
+    </div>
+
+</body>
+</html>

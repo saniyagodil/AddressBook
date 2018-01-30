@@ -4,11 +4,14 @@
     <meta charset="UTF-8" />
     <title>Title</title>
 </head>
+
 <body>
     <form action="#"
         th:action="@{/addressform}"
         th:object="${NewEntry}"
         method="post">
+
+        <input type="hidden" th:field="*{id}" />
 
         First Name : <input type="text" th:field="*{firstName}" />
         <span th:if="${#fields.hasErrors('firstName')}"

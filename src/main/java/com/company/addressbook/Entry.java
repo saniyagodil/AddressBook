@@ -1,28 +1,39 @@
 package com.company.addressbook;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
 
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+
+
+@Entity
 public class Entry {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
+
     @NotNull
-    @Size(min = 1, max = 10)
+    @Size(min = 1)
     private String firstName;
 
     @NotNull
-    @Size(min = 1, max = 10)
+    @Size(min = 1)
     private String lastName;
 
     @NotNull
-    @Size(min = 20, max = 50)
+    @Size(min = 20)
     private String address;
 
     @NotNull
-    @Size(min = 12, max = 30)
+    @Size(min = 12)
     private String email;
 
     @NotNull
-    @Size(min = 12, max = 12)
+    @Size(min = 12)
     private String phoneNum;
 
     public Entry(String f, String l, String a, String e, String p) {
@@ -79,6 +90,14 @@ public class Entry {
 
     public void setPhoneNum(String phoneNum) {
         this.phoneNum = phoneNum;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }
 
