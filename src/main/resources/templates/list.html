@@ -3,17 +3,57 @@
 <head>
     <meta charset="UTF-8" />
     <title>Title</title>
+    <style>
+        body {background-color: #E6E6FA;
+            text-align: center;}
+        h2 {color: #4B0082;
+            text-align: center;}
+        th {color: darkorchid;
+            text-align: center;}
+        td {color: black;
+            text-align: center;}
+    </style>
 </head>
 <body>
-    <a href="/addressform">Add an Entry</a><br />
-    <div th:each="entry : ${entries}">
-        <h4 th:inline="text">[[${entry.firstName}]] <br /></h4>
-        <h4 th:inline="text">[[${entry.lastName}]] <br /></h4>
-        <h4 th:inline="text">[[${entry.address}]] <br /></h4>
-        <h4 th:inline="text">[[${entry.email}]] <br /></h4>
-        <h4 th:inline="text">[[${entry.phoneNum}]] <br /></h4>
+    <h2>Address Book<br /></h2>
 
-    </div>
+    <table>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <!--<th>Address</th>
+            <th>Email</th>
+            <th>Phone Number</th>-->
+        </tr>
+        <tr th:each="entry : ${entries}">
+            <td th:text="${entry.firstName}"></td>
+            <td th:text="${entry.lastName}"></td>
+            <!--<td th:text="${entry.address}"></td>
+            <td th:text="${entry.email}"></td>
+            <td th:text="${entry.phoneNum}"></td>-->
+            <td>
+                <a th:href="@{/update/{id} (id=${entry.id})}">Update</a>
+                <a th:href="@{/detail/{id} (id=${entry.id})}">Details</a>
+                <a th:href="@{/delete/{id} (id=${entry.id})}">Delete</a>
+            </td>
+        </tr>
+
+    </table>
+
+    <br />
+    <a href="/addressform">Add an Entry</a><br />
+
+    <h3>Search for entry</h3>
+    <form action="#" th:action="@{/search}" method="post">
+
+        First Name : <input type="text" name="firstName" /><br/>
+        Last Name : <input type="text" name="lastName" />
+
+        <input type="submit" value="Submit" />
+    </form>
+
+
+
 
 </body>
 </html>

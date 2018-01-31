@@ -3,8 +3,20 @@
 <head>
     <meta charset="UTF-8" />
     <title>Title</title>
+    <style>
+        body {background-color: #E6E6FA;
+              text-align: center;}
+        h2 {color: #4B0082;
+            text-align: center;}
+        h3 {color: darkorchid;
+            text-align: center;}
+        p {color: black;
+            text-align: center;}
+    </style>
 </head>
 <body>
+    <h2>Address Book</h2>
+    <h3>Details of Entry</h3>
 <p th:inline="text">
     First Name: [[${NewEntry.firstName}]] <br />
     Last Name: [[${NewEntry.lastName}]] <br />
@@ -12,6 +24,7 @@
     Address: [[${NewEntry.address}]] <br />
     Phone Number: [[${NewEntry.phoneNum}]] <br />
 
+    <a th:href="@{/}">All Entries</a>
 </p>
 
 </body>

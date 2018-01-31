@@ -3,9 +3,19 @@
 <head>
     <meta charset="UTF-8" />
     <title>Title</title>
+    <style>
+        body {background-color: #E6E6FA;
+             text-align: center;}
+        h2 {color: #4B0082;
+            text-align: center;}
+        h3 {color: darkorchid;
+            text-align: center;}
+    </style>
 </head>
 
 <body>
+    <h2>Address Book</h2>
+    <h3>New Entry</h3>
     <form action="#"
         th:action="@{/addressform}"
         th:object="${NewEntry}"

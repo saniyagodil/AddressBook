@@ -4,9 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 
@@ -18,7 +17,7 @@ public class HomeController {
     AddressBook addressBook;
 
     @RequestMapping("/")
-    public String listEntries(Model model){
+    public String listEntries(Model model) {
         model.addAttribute("entries", addressBook.findAll());
         return "list";
     }
@@ -30,15 +29,39 @@ public class HomeController {
     }
 
     @PostMapping("/addressform")
-    public String processBook(@Valid Entry NewEntry, BindingResult result, Model model){
-        if (result.hasErrors()){
+    public String processBook(@Valid @ModelAttribute ("NewEntry") Entry NewEntry, BindingResult result, Model model) {
+        if (result.hasErrors()) {
             return "addressbookform";
         }
-        model.addAttribute("NewEntry", NewEntry );
+        model.addAttribute("NewEntry", NewEntry);
         //return "addressbookconfirm";
         addressBook.save(NewEntry);
         return "redirect:/";
     }
+
+    @RequestMapping("/detail/{id}")
+    public String showEntry(@PathVariable("id") long id, Model model) {
+        model.addAttribute("NewEntry", addressBook.findOne(id));
+        return "addressbookconfirm";
+    }
+
+    @RequestMapping("/update/{id}")
+    public String updateEntry(@PathVariable("id") long id, Model model) {
+        model.addAttribute("NewEntry", addressBook.findOne(id));
+        return "addressbookform";
+    }
+
+    @RequestMapping("/delete/{id}")
+    public String deleteEntry(@PathVariable("id") long id, Model model) {
+        addressBook.delete(id);
+        return "redirect:/";
+    }
+    @PostMapping("/search")
+    public String searchBook(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName, Model model){
+        model.addAttribute("matching", addressBook.findByLastNameAndFirstNameAllIgnoreCase(lastName, firstName));
+        return "searchbook";
+    }
+}
 
     /*
     *@GetMapping("/search")
@@ -51,6 +74,6 @@ public class HomeController {
     *    return "searchbook";
     }
     */
-}
+
 
 
